@@ -182,7 +182,7 @@ export function CreateVault() {
         <hr className="mt-[20px] h-[2px] rounded-sm bg-[#DDDDDD]" />
         {/* chain info div */}
         <h1 className="my-5 text-center font-unbounded text-xl">
-          Blockchain Data from Wallet
+          Onchain Footprint
         </h1>
         <RenderTokens tokens={mockBlockchainData} tokenNames={tokensToRender} />
         <hr className="mt-[20px] h-[2px] rounded-sm bg-[#DDDDDD]" />

@@ -5,6 +5,7 @@ import { useState } from "react";
 import { CreateProfile } from "~/components/createProfile";
 import { CreateVault } from "~/components/createVault";
 import { SignIn } from "~/components/signIn";
+import { SignMessage } from "~/components/signMessage";
 import { ViewProfile } from "~/components/viewProfile";
 import { api } from "~/utils/api";
 
@@ -71,6 +72,8 @@ const Home: NextPage = () => {
           </p> */}
           </div>
         </main>
+        {/* <SignMessage /> */}
+        <div className="mb-20" />
       </div>
     </>
   );
