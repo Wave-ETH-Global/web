@@ -25,13 +25,31 @@ export const CreateProfile = ({ vaultData, onSubmitProfile }) => {
   console.log(vaultData);
   const [selectedEntries, setSelectedEntries] = useState(new Set());
 
-  const handleTileClick = (item) => {
+  // const handleTileClick = (item) => {
+  //   const newSelectedEntries = new Set(selectedEntries);
+  //   if (selectedEntries.has(item)) {
+  //     newSelectedEntries.delete(item);
+  //   } else {
+  //     newSelectedEntries.add(item);
+  //   }
+  //   setSelectedEntries(newSelectedEntries);
+  // };
+  const handleTileClick = (item, isAvatar) => {
+    // Always store an object with value and isAvatar flag,
+    // instead of passing isAvatar the earlier way.
+    const entry = { value: item, isAvatar };
     const newSelectedEntries = new Set(selectedEntries);
-    if (selectedEntries.has(item)) {
-      newSelectedEntries.delete(item);
+
+    const foundEntry = Array.from(newSelectedEntries).find(
+      (e) => e.value === entry.value
+    );
+
+    if (!foundEntry) {
+      newSelectedEntries.add(entry);
     } else {
-      newSelectedEntries.add(item);
+      newSelectedEntries.delete(foundEntry);
     }
+
     setSelectedEntries(newSelectedEntries);
   };
 
@@ -50,22 +68,16 @@ export const CreateProfile = ({ vaultData, onSubmitProfile }) => {
         <p className="mb-4 text-center">Click tiles to add to your profile</p>
         <h1 className="mb-4 text-center">Personal Information</h1>
         <div className="flex flex-wrap justify-center">
-          {/* {Object.entries(vaultData).map(([key, value]) => (
-            <Tile
-              key={key}
-              label={value}
-              selected={selectedEntries.has(value)}
-              onClick={() => handleTileClick(value)}
-            />
-          ))} */}
           {Object.entries(vaultData)
             .filter(([key]) => key !== "blockchainData")
             .map(([key, value]) => (
               <Tile
                 key={key}
                 label={value}
-                onClick={() => handleTileClick(value)}
-                selected={selectedEntries.has(value)}
+                onClick={() => handleTileClick(value, key === "avatar")}
+                selected={Array.from(selectedEntries).some(
+                  ({ value: selectedValue }) => selectedValue === value
+                )}
                 isAvatar={key === "avatar"}
               />
             ))}
@@ -94,12 +106,13 @@ export const CreateProfile = ({ vaultData, onSubmitProfile }) => {
         </>
       )}
       <div className="selected-data mb-4 flex flex-wrap justify-center">
-        {Array.from(selectedEntries).map((value) => (
+        {Array.from(selectedEntries).map(({ value, isAvatar }) => (
           <Tile
             key={value}
             label={value}
             selected={true}
-            onClick={() => handleTileClick(value)}
+            onClick={() => handleTileClick(value, isAvatar)}
+            isAvatar={isAvatar}
           />
         ))}
       </div>

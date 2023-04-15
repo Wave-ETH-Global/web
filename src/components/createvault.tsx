@@ -90,9 +90,9 @@ const tokensToRender = [
 ];
 
 export function CreateVault() {
-  // const { loading, profileData } = useProfileChainInfo(
-  //   "0x6dd1E0028eF0a634b01E13B2291949255610b38f"
-  // );
+  const { loading, profileData } = useProfileChainInfo(
+    "0x6dd1E0028eF0a634b01E13B2291949255610b38f"
+  );
   const { address, isConnected } = useAccount();
   const [buttonText, setButtonText] = useState("Connect Wallet");
 
@@ -123,8 +123,6 @@ export function CreateVault() {
     console.log(fields);
   };
 
-  // console.log(profileData);
-  // console.log(loading);
   return (
     <div className="mx-1 flex flex-col items-center justify-center rounded-md bg-[#FFFFFF] p-[20px] shadow-md">
       <div className="w-full p-4">

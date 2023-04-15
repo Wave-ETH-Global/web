@@ -265,6 +265,7 @@ export function ViewProfile({ activeTab, setActiveTab, isSelf }: ProfileProps) {
       {activeTab === "profile" && <ProfileFeed />}
       {activeTab === "social" && (
         <div className="mt-4 w-full">
+          <LensIntegration />
           <SocialFeed
             header="Twitter"
             tweets={[
@@ -298,7 +299,6 @@ export function ViewProfile({ activeTab, setActiveTab, isSelf }: ProfileProps) {
               },
             ]}
           />
-          <LensIntegration />
         </div>
       )}
     </>
