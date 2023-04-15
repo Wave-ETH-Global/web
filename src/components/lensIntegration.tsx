@@ -1,4 +1,4 @@
-import { Profile } from "@lens-protocol/widgets-react";
+import { Profile, Publication } from "@lens-protocol/widgets-react";
 import React, { useState } from "react";
 
 type FeedProps = {
@@ -23,7 +23,16 @@ export function LensIntegration() {
         </button>
       </div>
 
-      {isVisible && <Profile handle="stani" />}
+      {isVisible && (
+        <>
+          <Profile handle="meesh" containerStyle={{ width: "auto" }} />
+          {/* <div className="max-w-[300px]">
+            <Publication
+              publicationId="0x8da0-0x09"
+            />
+          </div> */}
+        </>
+      )}
     </div>
   );
 }

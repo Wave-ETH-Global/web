@@ -59,11 +59,11 @@ const Home: NextPage = () => {
             />
 
             <div className="mb-5" />
-            <ViewProfile
+            {/* <ViewProfile
               activeTab={activeTab}
               setActiveTab={setActiveTab}
               isSelf={false}
-            />
+            /> */}
             {/* <BottomNav /> */}
             <div className="mb-20" />
             {/* <p className="">
