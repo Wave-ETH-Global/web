@@ -2,6 +2,11 @@
 import { config, dom, library } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import {
+  faGithub,
+  faLinkedin,
+  faTwitter,
+} from "@fortawesome/free-brands-svg-icons";
+import {
   faBell,
   faCaretDown,
   faEnvelope,
@@ -43,7 +48,17 @@ if (typeof window !== "undefined") {
 }
 
 // FontAwesome Library
-library.add(faHome, faSearch, faShieldAlt, faBell, faEnvelope, faCaretDown);
+library.add(
+  faHome,
+  faSearch,
+  faShieldAlt,
+  faBell,
+  faEnvelope,
+  faCaretDown,
+  faTwitter,
+  faGithub,
+  faLinkedin
+);
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (

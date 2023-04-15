@@ -10,7 +10,6 @@ export function SignIn() {
   };
 
   const handleCreateVault = () => {
-    // Handle Create Vault logic here
     console.log("Create Vault:", inputValue);
   };
 

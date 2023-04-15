@@ -103,10 +103,9 @@ interface ProfileProps {
 }
 
 const SocialIcons: React.FC<SocialIconsProps> = ({ platforms }) => (
-  <div className="flex items-center space-x-3">
+  <div className="flex items-center space-x-3 pr-5">
     {Object.keys(platforms).map((platform) => (
       <>
-        {/* broken for now, need to add icons. using plaintext in meantime. */}
         <a
           key={platform}
           href={platforms[platform]}
@@ -115,7 +114,6 @@ const SocialIcons: React.FC<SocialIconsProps> = ({ platforms }) => (
         >
           <i className={`fab fa-${platform}`}></i>
         </a>
-        <a href={platforms[platform]}>{platform}</a>
       </>
     ))}
   </div>
@@ -199,7 +197,7 @@ export function ViewProfile({ activeTab, setActiveTab, isSelf }: ProfileProps) {
             <MutualConnections connections={data.mutualConnections} />
           </div>
 
-          <div className="flex items-center space-x-5">
+          <div className="flex items-center justify-between space-x-5">
             {!isSelf ? (
               <button className="rounded bg-blue-500 px-4 py-2 font-unbounded font-bold text-white">
                 Connect
