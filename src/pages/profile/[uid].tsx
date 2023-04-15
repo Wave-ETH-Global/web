@@ -1,7 +1,7 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 
-import { ViewProfile } from "~/components/viewprofile";
+import { ViewProfile } from "~/components/viewProfile";
 
 const OtherProfile: NextPage = () => {
   return (

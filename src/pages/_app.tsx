@@ -24,7 +24,7 @@ import { type AppType } from "next/app";
 import { WagmiConfig, configureChains, createClient } from "wagmi";
 import { arbitrum, mainnet, polygon } from "wagmi/chains";
 
-import { BottomNav } from "~/components/bottomnav";
+import { BottomNav } from "~/components/bottomNav";
 import "~/styles/globals.css";
 import { api } from "~/utils/api";
 

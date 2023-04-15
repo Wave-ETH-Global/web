@@ -4,10 +4,10 @@ import Head from "next/head";
 import Link from "next/link";
 import { useState } from "react";
 
-import { BottomNav } from "~/components/bottomnav";
-import { CreateVault } from "~/components/createvault";
-import { SignIn } from "~/components/signin";
-import { ViewProfile } from "~/components/viewprofile";
+import { BottomNav } from "~/components/bottomNav";
+import { CreateVault } from "~/components/createVault";
+import { SignIn } from "~/components/signIn";
+import { ViewProfile } from "~/components/viewProfile";
 import { api } from "~/utils/api";
 
 const Home: NextPage = () => {
@@ -24,9 +24,6 @@ const Home: NextPage = () => {
       <div className="min-h-screen bg-[#DDDDDD]">
         <main className="mx-auto flex w-full max-w-md">
           <div className="">
-            <h1 className="mt-5 text-center font-unbounded text-3xl">
-              Component Mocks
-            </h1>
             <div className="mb-5" />
             <SignIn />
             <div className="mb-5" />

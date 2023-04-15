@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
+import QRCode from "react-qr-code";
 
-import { ProfileFeed } from "./profilefeed";
-import { SocialFeed } from "./socialfeed";
+import { ProfileFeed } from "./profileFeed";
+import { SocialFeed } from "./socialFeed";
 
 // import avatarPlaceholderImg from "./avatar_placeholder_image.png";
 
@@ -14,14 +15,15 @@ interface ProfileProps {
 
 // example data
 const data = {
-  name: "John!",
-  handle: "@john.doe",
-  ens: "johndoe.eth",
-  title: "Experienced at being a placeholder character",
-  bio: "I'm a placeholder character for the web3 social app Wave! Please be nice to me!",
-  currentLocation: "ETH Tokyo!",
-  futureLocation: "Cyberspace",
-  avatar: "https://i.pravatar.cc/300",
+  name: "Skylar",
+  handle: "@skylar",
+  ens: "skylar.eth",
+  title: "Founder at wave.xyz",
+  bio: "Traveler and foodie. Spend my days contributing to DAOs and tinkering with new ideas to further web3 for all.",
+  currentLocation: "ETH Tokyo",
+  futureLocation: "Lisbon",
+  avatar:
+    "https://i.seadn.io/gae/E8MVasG7noxC0Fa_duhnexc2xze1PzT1jzyeaHsytOC4722C2Zeo7EhUR8-T6mSem9-4XE5ylrCtoAsceZ_lXez_kTaMufV5pfLc3Fk?auto=format&w=3840",
   mutualConnections: [
     { name: "Jeff", handle: "@jeff", avatar: "https://i.pravatar.cc/300" },
     { name: "Sarah", handle: "@sarah", avatar: "https://i.pravatar.cc/301" },
@@ -156,10 +158,11 @@ const MutualConnections: React.FC<MutualConnectionsProps> = ({
 
 export function ViewProfile({ activeTab, setActiveTab, isSelf }: ProfileProps) {
   const avatarPlaceholder = "avatar-placeholder-color"; // Add desired color here
+  const [wave, setWave] = useState(false);
   return (
     <>
       <div className="mx-1 flex flex-col items-center justify-center rounded-md bg-[#FFFFFF] p-[20px] shadow-md">
-        <div className="flex">
+        <div className="ml-4 flex self-start">
           <div className="mr-4 self-center">
             <img
               src={data.avatar}
@@ -199,17 +202,41 @@ export function ViewProfile({ activeTab, setActiveTab, isSelf }: ProfileProps) {
 
           <div className="flex items-center justify-between space-x-5">
             {!isSelf ? (
-              <button className="rounded bg-blue-500 px-4 py-2 font-unbounded font-bold text-white">
+              <button
+                className="rounded bg-blue-500 px-4 py-2 font-unbounded font-bold text-white"
+                onClick={() => console.log("handle connect!")}
+              >
                 Connect
               </button>
             ) : (
-              <button className="rounded bg-blue-500 px-4 py-2 font-unbounded font-bold text-white">
-                Wave 👋
+              <button
+                className="rounded bg-blue-500 px-4 py-2 font-unbounded font-bold text-white"
+                onClick={() => setWave(!wave)}
+              >
+                {!wave ? "Wave 👋" : "Done!"}
               </button>
             )}
             <SocialIcons platforms={data.platforms} />
           </div>
         </div>
+        {isSelf && wave && (
+          <div
+            style={{
+              height: "auto",
+              margin: "0 auto",
+              maxWidth: 200,
+              width: "100%",
+              marginTop: "20px",
+            }}
+          >
+            <QRCode
+              size={256}
+              style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+              value={"www.google.com"}
+              viewBox={`0 0 256 256`}
+            />
+          </div>
+        )}
         <hr className="mt-[20px] h-[2px] w-full rounded-sm bg-[#DDDDDD]" />
         <div className="ml-[35px] mt-4 flex w-full items-center font-unbounded text-lg">
           <button

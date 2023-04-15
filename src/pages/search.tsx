@@ -1,8 +1,8 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 
-import { BottomNav } from "~/components/bottomnav";
-import { ConnectionsList } from "~/components/connectionslist";
+import { BottomNav } from "~/components/bottomNav";
+import { ConnectionsList } from "~/components/connectionsList";
 
 const Search: NextPage = () => {
   const mutualConnections = [

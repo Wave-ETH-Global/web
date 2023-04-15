@@ -2,8 +2,8 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import { useState } from "react";
 
-import { BottomNav } from "~/components/bottomnav";
-import { ViewProfile } from "~/components/viewprofile";
+import { BottomNav } from "~/components/bottomNav";
+import { ViewProfile } from "~/components/viewProfile";
 import { api } from "~/utils/api";
 
 const Profile: NextPage = () => {
