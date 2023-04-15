@@ -1,7 +1,8 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
+import { ConnectionsList } from "~/components/connectionsList";
 import { CreateProfile } from "~/components/createProfile";
 import { CreateVault } from "~/components/createVault";
 import { SignIn } from "~/components/signIn";
@@ -28,20 +29,111 @@ const vaultData = {
   ],
 };
 
+const randomTags = () => {
+  const tags = [
+    "Hackathons",
+    "NFTs",
+    "Developer",
+    "Investor",
+    "DeFi",
+    "Lisbon",
+  ];
+  const check = () => Math.random() <= 0.3;
+  return tags.filter((_) => check());
+};
+
+const mutualConnections = [
+  {
+    name: "Jeff",
+    handle: "@jeff",
+    avatar: "https://cryptopunks.app/public/images/cryptopunks/punk8857.png",
+  },
+  { name: "Sarah", handle: "@sarah", avatar: "https://i.pravatar.cc/301" },
+  {
+    name: "Dave",
+    handle: "@dave",
+    avatar:
+      "https://i.seadn.io/gcs/files/716ecc2a1f4a491257b33d655f454963.png?auto=format&w=1000",
+  },
+  {
+    name: "Tara Reeves",
+    handle: "@tara",
+    avatar: "https://i.pravatar.cc/303",
+  },
+  {
+    name: "Michael",
+    handle: "@michael",
+    avatar:
+      "https://i.seadn.io/gcs/files/ba04ea8bd00d4c34528be32c6c2f7be4.png?auto=format&w=1000",
+  },
+  {
+    name: "Alicia",
+    handle: "@alicia",
+    avatar:
+      "https://i.seadn.io/gcs/files/a55f9d8aab226d601874bf7593649549.png?auto=format&w=1000",
+  },
+  { name: "Samantha", handle: "@sam", avatar: "https://i.pravatar.cc/306" },
+  {
+    name: "Wade",
+    handle: "@wade",
+    avatar:
+      "https://i.seadn.io/gcs/files/f98b38293c287476d83256c9719e8b83.png?auto=format&w=1000",
+  },
+  { name: "Oscar", handle: "@oscar", avatar: "https://i.pravatar.cc/308" },
+  { name: "Jimmy", handle: "@jimmy", avatar: "https://i.pravatar.cc/309" },
+  {
+    name: "Victoria",
+    handle: "@victoria",
+    avatar: "https://i.pravatar.cc/310",
+  },
+  { name: "Danny", handle: "@danny", avatar: "https://i.pravatar.cc/311" },
+  { name: "Celine", handle: "@celine", avatar: "https://i.pravatar.cc/312" },
+  { name: "Wendy", handle: "@wendy", avatar: "https://i.pravatar.cc/313" },
+  { name: "Travis", handle: "@travis", avatar: "https://i.pravatar.cc/314" },
+  {
+    name: "Melinda",
+    handle: "@melinda",
+    avatar: "https://i.pravatar.cc/315",
+  },
+  { name: "Shawn", handle: "@shawn", avatar: "https://i.pravatar.cc/316" },
+  { name: "Olivia", handle: "@olivia", avatar: "https://i.pravatar.cc/317" },
+  { name: "Gavin", handle: "@gavin", avatar: "https://i.pravatar.cc/318" },
+  { name: "Monica", handle: "@monica", avatar: "https://i.pravatar.cc/319" },
+].map((con) => ({
+  ...con,
+  tags: randomTags(),
+}));
+
+console.log(mutualConnections);
+
 const Flow: NextPage = () => {
-  const hello = api.example.hello.useQuery({ text: "from tRPC" });
   const [activeTab, setActiveTab] = useState("profile"); // Declare "profile" as initial active tab.
   const [step, setStep] = useState(0);
+  const handleKeyPress = (event: KeyboardEvent) => {
+    if (event.key === "ArrowRight") {
+      setStep((prevStep) => prevStep + 1);
+    }
+    if (event.key === "ArrowLeft") {
+      setStep((prevStep) => prevStep - 1);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyPress, false);
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress, false);
+    };
+  }, []);
+
   return (
     <>
       <Head>
-        {/* <Web3Button /> */}
         <title>Wave Protocol</title>
         <meta name="description" content="Social Tooling" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="min-h-screen bg-[#DDDDDD]">
-        <main className="mx-auto flex w-full max-w-md">
+        <main className="mx-auto flex w-full max-w-md justify-center">
           <div className="">
             <div className="mb-5" />
             {step === 0 && <SignIn />}
@@ -70,12 +162,9 @@ const Flow: NextPage = () => {
                 isSelf={false}
               />
             )}
-            <button onClick={() => setStep(step + 1)}>next step</button>
-            {/* <BottomNav /> */}
+            <div className="mb-5" />
+            {step === 5 && <ConnectionsList connections={mutualConnections} />}
             <div className="mb-20" />
-            {/* <p className="">
-            {hello.data ? hello.data.greeting : "Loading tRPC query..."}
-          </p> */}
           </div>
         </main>
       </div>

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useAccount, useConnect, useDisconnect } from "wagmi";
 
 import useProfileChainInfo from "~/hooks/useProfileChainInfo";
-import { useSignup } from "~/hooks/useSignUp";
+import { useSignup } from "~/hooks/useSignup";
 
 const userFields = [
   { key: "name", placeholder: "Name", required: true },
@@ -97,6 +97,44 @@ export function CreateVault() {
   const { address, isConnected } = useAccount();
   const [buttonText, setButtonText] = useState("Connect Wallet");
 
+  const { createProfile, isLoading, error } = useSignup();
+
+  // Add more user-friendly error display based on how you handle UI/UX
+  useEffect(() => {
+    if (error) {
+      console.log("An error occurred:", error);
+      // OR: displaySnackbar("Oopsies! An error occurred 😢");
+    }
+  }, [error]);
+
+  const handleSubmitProfile = async () => {
+    if (!isConnected) {
+      // If the isConnected property is missed, please call the function
+      // related to your wallet in useAccount
+      // useConnect();
+      return;
+    }
+
+    // Construct metadata as a key-value json from fields
+    const metadata = { ...fields };
+    delete metadata?.handle;
+
+    // Construct Profile information
+    const profileData = {
+      ethAddress: address,
+      userhandle: fields.handle,
+      metadata: metadata,
+      publicTags: [], // Empty array or populated depending on the logic you have
+      tokens: [], // Empty array or populated depending on the logic you have
+    };
+
+    const { token, success } = await createProfile(profileData);
+    if (success) {
+      console.log("JWT token received:", token);
+      // Redirect to a protected page, handle JWT auth logic or anything else 🌹
+    }
+  };
+
   useEffect(() => {
     if (isConnected) {
       setButtonText("Create Identity Vault");
@@ -152,7 +190,7 @@ export function CreateVault() {
       <Web3Button />
       <button
         className="mb-5 mt-5 rounded bg-blue-500 px-20 py-2 font-unbounded font-bold text-white"
-        onClick={() => handleSubmit()}
+        onClick={() => handleSubmitProfile()}
       >
         {buttonText}
       </button>

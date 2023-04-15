@@ -199,10 +199,19 @@ export function ViewProfile({ activeTab, setActiveTab, isSelf }: ProfileProps) {
             )}
           </div>
 
-          <div className="my-4">
-            <h2 className="text-md font-bold">Mutual Connections</h2>
-            <MutualConnections connections={data.mutualConnections} />
-          </div>
+          {!isSelf && (
+            <div className="my-4">
+              <h2 className="text-md font-bold">Mutual Connections</h2>
+              <MutualConnections connections={data.mutualConnections} />
+            </div>
+          )}
+
+          {isSelf && (
+            <div className="my-4">
+              <h2 className="text-md font-bold">Connections</h2>
+              <MutualConnections connections={data.mutualConnections} />
+            </div>
+          )}
 
           <div className="flex items-center justify-between space-x-5">
             {!isSelf ? (

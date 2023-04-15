@@ -4,6 +4,7 @@ interface ConnectionData {
   name: string;
   handle: string;
   avatar: string;
+  tags: string[];
 }
 
 export const ConnectionsList = ({
@@ -13,11 +14,29 @@ export const ConnectionsList = ({
 }) => {
   const [searchValue, setSearchValue] = useState("");
 
-  const filteredConnections = connections.filter(
-    ({ name, handle }) =>
-      name.toLowerCase().includes(searchValue.toLowerCase()) ||
-      handle.toLowerCase().includes(searchValue.toLowerCase())
-  );
+  // const filteredConnections = connections.filter(
+  //   ({ name, handle }) =>
+  //     name.toLowerCase().includes(searchValue.toLowerCase()) ||
+  //     handle.toLowerCase().includes(searchValue.toLowerCase())
+  // );
+
+  const filters = searchValue
+    .split(/[\s,]+/)
+    .filter(Boolean)
+    .map((filter) => filter.toLowerCase());
+
+  const isItemMatchingFilters = (connection) => {
+    return filters.every((filter) => {
+      const nameMatching = connection.name.toLowerCase().includes(filter);
+      const handleMatching = connection.handle.toLowerCase().includes(filter);
+      const tagMatching = connection.tags
+        ? connection.tags.some((tag) => tag.toLowerCase().includes(filter))
+        : false;
+      return nameMatching || handleMatching || tagMatching;
+    });
+  };
+
+  const filteredConnections = connections.filter(isItemMatchingFilters);
 
   return (
     <div className="mt-5 flex w-full flex-col rounded-md bg-[#FFFFFF] p-[20px] shadow-md">
