@@ -4,11 +4,27 @@ import Head from "next/head";
 import Link from "next/link";
 import { useState } from "react";
 
-import { BottomNav } from "~/components/bottomNav";
+import { CreateProfile } from "~/components/createProfile";
 import { CreateVault } from "~/components/createVault";
 import { SignIn } from "~/components/signIn";
 import { ViewProfile } from "~/components/viewProfile";
 import { api } from "~/utils/api";
+
+const vaultData = {
+  name: "Skylar",
+  handle: "@skylar",
+  ens: "skylar.eth",
+  title: "Founder at wave.xyz",
+  bio: "Traveler and foodie. Spend my days contributing to DAOs and tinkering with new ideas to further web3 for all.",
+  currentLocation: "ETH Tokyo",
+  futureLocation: "Lisbon",
+  avatar:
+    "https://i.seadn.io/gae/E8MVasG7noxC0Fa_duhnexc2xze1PzT1jzyeaHsytOC4722C2Zeo7EhUR8-T6mSem9-4XE5ylrCtoAsceZ_lXez_kTaMufV5pfLc3Fk?auto=format&w=3840",
+  // blockchainData: [
+  //   { name: "FWB", type: "DAO" },
+  //   { name: "!fundrop", type: "NFT" },
+  // ],
+};
 
 const Home: NextPage = () => {
   const hello = api.example.hello.useQuery({ text: "from tRPC" });
@@ -28,6 +44,11 @@ const Home: NextPage = () => {
             <SignIn />
             <div className="mb-5" />
             <CreateVault />
+            <div className="mb-5" />
+            <CreateProfile
+              vaultData={vaultData}
+              onSubmitProfile={console.log}
+            />
             <div className="mb-5" />
             <ViewProfile
               activeTab={activeTab}

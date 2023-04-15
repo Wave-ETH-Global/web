@@ -36,6 +36,12 @@ const mockBlockchainData = [
     tokenAddress: "0x6120991c423f3566753d3c6c91a5b50d7d2461b3",
     tokenType: "ERC20",
   },
+  {
+    chainId: "1",
+    token: { name: "Nouns DAO", symbol: "Nouns" },
+    tokenAddress: "0x6120991c423f3566753d3c6c91a5b50d7d2461b3",
+    tokenType: "ERC721",
+  },
 ];
 
 const RenderTokens = ({ tokens, tokenNames }) => {
@@ -65,6 +71,10 @@ const tokensToRender = [
   },
   {
     name: "FWB",
+    address: "0x6120991c423f3566753d3c6c91a5b50d7d2461b3",
+  },
+  {
+    name: "Nouns DAO",
     address: "0x6120991c423f3566753d3c6c91a5b50d7d2461b3",
   },
 ];
@@ -113,7 +123,7 @@ export function CreateVault() {
         <hr className="mt-[20px] h-[2px] rounded-sm bg-[#DDDDDD]" />
         {/* chain info div */}
         <h1 className="my-5 text-center font-unbounded text-xl">
-          Blockchain Data for Wallet
+          Blockchain Data from Wallet
         </h1>
         <RenderTokens tokens={mockBlockchainData} tokenNames={tokensToRender} />
         <hr className="mt-[20px] h-[2px] rounded-sm bg-[#DDDDDD]" />

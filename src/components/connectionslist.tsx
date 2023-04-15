@@ -19,8 +19,6 @@ export const ConnectionsList = ({
       handle.toLowerCase().includes(searchValue.toLowerCase())
   );
 
-  const tags = ["coffee", "developer", "mentor", "investor"];
-
   return (
     <div className="mt-5 flex w-full flex-col rounded-md bg-[#FFFFFF] p-[20px] shadow-md">
       <input

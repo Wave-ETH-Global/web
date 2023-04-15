@@ -18,7 +18,7 @@ function InfoCard({ header, tokens }: { header: string; tokens: string[] }) {
       </div>
 
       {isVisible && (
-        <div className="w-full select-none overflow-hidden overflow-x-scroll px-4 py-2">
+        <div className="flex w-full select-none flex-col items-center overflow-hidden overflow-x-scroll px-4 py-2">
           {tokens.map((token, index) => (
             <div
               key={index}
@@ -43,6 +43,7 @@ export function ProfileFeed() {
       <InfoCard header="DAOs" tokens={["Boys Club", "FWB", "Nouns DAO"]} />
       <InfoCard
         header="Verifiable Credentials"
+        // ! important: disco.xyz integration
         tokens={["Credential1", "Credential2", "Credential3"]}
       />
     </div>
