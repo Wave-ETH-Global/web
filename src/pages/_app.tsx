@@ -3,6 +3,7 @@ import { config, dom, library } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import {
   faBell,
+  faCaretDown,
   faEnvelope,
   faHome,
   faSearch,
@@ -41,7 +42,7 @@ if (typeof window !== "undefined") {
 }
 
 // FontAwesome Library
-library.add(faHome, faSearch, faShieldAlt, faBell, faEnvelope);
+library.add(faHome, faSearch, faShieldAlt, faBell, faEnvelope, faCaretDown);
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (

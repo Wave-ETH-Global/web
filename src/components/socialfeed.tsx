@@ -28,15 +28,18 @@ export const SocialFeed: React.FC<SocialFeedProps> = ({ header, tweets }) => {
       </div>
 
       {isVisible && (
-        <div className="h-[200px] select-none space-y-4 overflow-y-scroll px-4 py-2">
+        <div className="h-[400px] select-none space-y-4 overflow-y-scroll px-4 py-2">
           {tweets.map((tweet, index) => (
-            <div key={index} className="rounded-md bg-[#F5F5F5] pb-6 pl-4 pt-4">
+            <div
+              key={index}
+              className="h-auto rounded-md bg-[#F5F5F5] pb-6 pl-4 pt-4"
+            >
               <p>{tweet.text}</p>
               {tweet.image && (
                 <img
                   src={tweet.image}
                   alt={`Social Feed Image ${index}`}
-                  className="my-2 h-20 w-full rounded-sm object-cover"
+                  className="my-2 h-auto w-full max-w-[450px] rounded-sm object-cover"
                 />
               )}
             </div>

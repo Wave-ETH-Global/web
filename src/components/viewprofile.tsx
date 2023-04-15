@@ -9,42 +9,56 @@ interface ProfileProps {
   data: ProfileData;
   activeTab: string; // Add these two props
   setActiveTab: (tab: string) => void;
+  isSelf: boolean;
 }
 
 // example data
 const data = {
-  name: "Skyler",
+  name: "John!",
   handle: "@john.doe",
   ens: "johndoe.eth",
-  title: "Founder at being a placeholder character",
-  bio: "I'm a placeholder character for the web3 social app Wave!",
+  title: "Experienced at being a placeholder character",
+  bio: "I'm a placeholder character for the web3 social app Wave! Please be nice to me!",
   currentLocation: "ETH Tokyo!",
   futureLocation: "Cyberspace",
   avatar: "https://i.pravatar.cc/300",
   mutualConnections: [
-    { name: "jeff", handle: "@jeff", avatar: "https://i.pravatar.cc/303" },
-    { name: "sarah", handle: "@sarah", avatar: "https://i.pravatar.cc/301" },
-    { name: "dave", handle: "@dave", avatar: "https://i.pravatar.cc/302" },
-    { name: "dave", handle: "@dave", avatar: "https://i.pravatar.cc/300" },
-    { name: "dave", handle: "@dave", avatar: "https://i.pravatar.cc/300" },
-    { name: "dave", handle: "@dave", avatar: "https://i.pravatar.cc/300" },
-    { name: "dave", handle: "@dave", avatar: "https://i.pravatar.cc/300" },
-    { name: "dave", handle: "@dave", avatar: "https://i.pravatar.cc/300" },
-    { name: "dave", handle: "@dave", avatar: "https://i.pravatar.cc/300" },
-    { name: "dave", handle: "@dave", avatar: "https://i.pravatar.cc/300" },
-    { name: "dave", handle: "@dave", avatar: "https://i.pravatar.cc/300" },
-    { name: "dave", handle: "@dave", avatar: "https://i.pravatar.cc/300" },
-    { name: "dave", handle: "@dave", avatar: "https://i.pravatar.cc/300" },
-    { name: "dave", handle: "@dave", avatar: "https://i.pravatar.cc/300" },
-    { name: "dave", handle: "@dave", avatar: "https://i.pravatar.cc/300" },
-    { name: "dave", handle: "@dave", avatar: "https://i.pravatar.cc/300" },
-    { name: "dave", handle: "@dave", avatar: "https://i.pravatar.cc/300" },
-    { name: "dave", handle: "@dave", avatar: "https://i.pravatar.cc/300" },
-    { name: "dave", handle: "@dave", avatar: "https://i.pravatar.cc/300" },
-    { name: "dave", handle: "@dave", avatar: "https://i.pravatar.cc/300" },
-    { name: "dave", handle: "@dave", avatar: "https://i.pravatar.cc/300" },
-    { name: "dave", handle: "@dave", avatar: "https://i.pravatar.cc/300" },
-    { name: "dave", handle: "@dave", avatar: "https://i.pravatar.cc/300" },
+    { name: "Jeff", handle: "@jeff", avatar: "https://i.pravatar.cc/300" },
+    { name: "Sarah", handle: "@sarah", avatar: "https://i.pravatar.cc/301" },
+    { name: "Dave", handle: "@dave", avatar: "https://i.pravatar.cc/302" },
+    {
+      name: "Tara Reeves",
+      handle: "@tara",
+      avatar: "https://i.pravatar.cc/303",
+    },
+    {
+      name: "Michael",
+      handle: "@michael",
+      avatar: "https://i.pravatar.cc/304",
+    },
+    { name: "Alicia", handle: "@alicia", avatar: "https://i.pravatar.cc/305" },
+    { name: "Samantha", handle: "@sam", avatar: "https://i.pravatar.cc/306" },
+    { name: "Wade", handle: "@wade", avatar: "https://i.pravatar.cc/307" },
+    { name: "Oscar", handle: "@oscar", avatar: "https://i.pravatar.cc/308" },
+    { name: "Jimmy", handle: "@jimmy", avatar: "https://i.pravatar.cc/309" },
+    {
+      name: "Victoria",
+      handle: "@victoria",
+      avatar: "https://i.pravatar.cc/310",
+    },
+    { name: "Danny", handle: "@danny", avatar: "https://i.pravatar.cc/311" },
+    { name: "Celine", handle: "@celine", avatar: "https://i.pravatar.cc/312" },
+    { name: "Wendy", handle: "@wendy", avatar: "https://i.pravatar.cc/313" },
+    { name: "Travis", handle: "@travis", avatar: "https://i.pravatar.cc/314" },
+    {
+      name: "Melinda",
+      handle: "@melinda",
+      avatar: "https://i.pravatar.cc/315",
+    },
+    { name: "Shawn", handle: "@shawn", avatar: "https://i.pravatar.cc/316" },
+    { name: "Olivia", handle: "@olivia", avatar: "https://i.pravatar.cc/317" },
+    { name: "Gavin", handle: "@gavin", avatar: "https://i.pravatar.cc/318" },
+    { name: "Monica", handle: "@monica", avatar: "https://i.pravatar.cc/319" },
   ],
   platforms: {
     twitter: "https://twitter.com/johndoe",
@@ -142,7 +156,7 @@ const MutualConnections: React.FC<MutualConnectionsProps> = ({
   );
 };
 
-export function ViewProfile({ activeTab, setActiveTab }: ProfileProps) {
+export function ViewProfile({ activeTab, setActiveTab, isSelf }: ProfileProps) {
   const avatarPlaceholder = "avatar-placeholder-color"; // Add desired color here
   return (
     <>
@@ -167,15 +181,17 @@ export function ViewProfile({ activeTab, setActiveTab }: ProfileProps) {
         <div className="ml-4">
           <p className="mb-2 mt-4">{data.bio}</p>
 
-          <div className="grid w-full grid-cols-2">
-            <div className="">
-              <h2 className="text-md font-bold">Current</h2>
+          <div className="flex flex-row">
+            <div className="mr-5">
+              <h2 className="text-xl font-bold">📍</h2>
               <span>{data.currentLocation}</span>
             </div>
-            <div className="">
-              <h2 className="text-md font-bold">Future</h2>
-              <span>{data.futureLocation}</span>
-            </div>
+            {data.futureLocation && (
+              <div className="">
+                <h2 className="text-xl font-bold">🔜</h2>
+                <span>{data.futureLocation}</span>
+              </div>
+            )}
           </div>
 
           <div className="my-4">
@@ -184,12 +200,19 @@ export function ViewProfile({ activeTab, setActiveTab }: ProfileProps) {
           </div>
 
           <div className="flex items-center space-x-5">
-            <button className="rounded bg-blue-500 px-4 py-2 font-unbounded font-bold text-white">
-              Connect
-            </button>
+            {!isSelf ? (
+              <button className="rounded bg-blue-500 px-4 py-2 font-unbounded font-bold text-white">
+                Connect
+              </button>
+            ) : (
+              <button className="rounded bg-blue-500 px-4 py-2 font-unbounded font-bold text-white">
+                Wave 👋
+              </button>
+            )}
             <SocialIcons platforms={data.platforms} />
           </div>
         </div>
+        <hr className="mt-[20px] h-[2px] w-full rounded-sm bg-[#DDDDDD]" />
         <div className="ml-[35px] mt-4 flex w-full items-center font-unbounded text-lg">
           <button
             className={`mr-4 font-bold ${
@@ -211,27 +234,33 @@ export function ViewProfile({ activeTab, setActiveTab }: ProfileProps) {
       </div>
 
       {activeTab === "profile" && <ProfileFeed />}
-      {/* {activeTab === "social" && <SocialFeed />} */}
       {activeTab === "social" && (
         <div className="mt-4 w-full">
           <SocialFeed
             header="Twitter"
             tweets={[
               {
-                text: "Mock tweet 1",
+                text: "Tokyo has been amazing! I can't believe I'm here!",
                 image: "https://source.unsplash.com/c/random/1",
               },
               {
-                text: "Mock tweet 2",
+                text: "Second meal in Japan!",
                 image: "https://source.unsplash.com/c/random/2",
+              },
+              {
+                text: "First meal in Japan!",
+                image: "https://source.unsplash.com/c/random/2",
+              },
+              {
+                text: "Flying to japan!",
               },
             ]}
           />
           <SocialFeed
-            header="Bluesky"
+            header="BlueSky"
             tweets={[
               {
-                text: "Mock Bluesky tweet 1",
+                text: "Wow, this app is so much better than twitter.",
                 image: "https://source.unsplash.com/c/random/3",
               },
               {

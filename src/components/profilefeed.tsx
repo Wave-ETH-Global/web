@@ -40,10 +40,7 @@ function InfoCard({ header, tokens }: { header: string; tokens: string[] }) {
 export function ProfileFeed() {
   return (
     <div className="mt-4 w-full">
-      <InfoCard
-        header="DAOs"
-        tokens={["DAO1", "DAO2", "DAO3", "FWB", "DAO5"]}
-      />
+      <InfoCard header="DAOs" tokens={["Boys Club", "FWB", "Nouns DAO"]} />
       <InfoCard
         header="Verifiable Credentials"
         tokens={["Credential1", "Credential2", "Credential3"]}

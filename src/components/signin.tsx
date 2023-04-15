@@ -16,6 +16,7 @@ export function SignIn() {
 
   return (
     <div className="mx-1 flex flex-col items-center justify-center rounded-md bg-[#FFFFFF] p-[20px] shadow-md">
+      <h1 className="mt-5 font-unbounded text-2xl">Welcome to Wave! 👋</h1>
       <div className="flex min-h-[200px] items-center justify-center">
         <div className="w-full p-4">
           <input

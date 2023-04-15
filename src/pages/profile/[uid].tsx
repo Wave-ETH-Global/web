@@ -10,7 +10,7 @@ import { SignIn } from "~/components/signin";
 import { ViewProfile } from "~/components/viewprofile";
 import { api } from "~/utils/api";
 
-const Home: NextPage = () => {
+const OtherProfile: NextPage = () => {
   const hello = api.example.hello.useQuery({ text: "from tRPC" });
   const [activeTab, setActiveTab] = useState("profile"); // Declare "profile" as initial active tab.
   return (
@@ -23,31 +23,11 @@ const Home: NextPage = () => {
       </Head>
       <div className="min-h-screen bg-[#DDDDDD]">
         <main className="mx-auto flex w-full max-w-md">
-          <div className="">
-            <h1 className="mt-5 text-center font-unbounded text-3xl">
-              Component Mocks
-            </h1>
-            <div className="mb-5" />
-            <SignIn />
-            <div className="mb-5" />
-            <CreateVault />
-            <div className="mb-5" />
-            <ViewProfile
-              activeTab={activeTab}
-              setActiveTab={setActiveTab}
-              isSelf={true}
-            />
-            <div className="mb-5" />
-            <BottomNav />
-            <div className="mb-20" />
-            {/* <p className="">
-            {hello.data ? hello.data.greeting : "Loading tRPC query..."}
-          </p> */}
-          </div>
+          <h1>test</h1>
         </main>
       </div>
     </>
   );
 };
 
-export default Home;
+export default OtherProfile;

@@ -1,4 +1,6 @@
+import { Web3Button, useWeb3Modal } from "@web3modal/react";
 import { useState } from "react";
+import { useAccount, useConnect, useDisconnect } from "wagmi";
 
 import useProfileChainInfo from "~/hooks/useProfileChainInfo";
 
@@ -17,6 +19,7 @@ export function CreateVault() {
   const { loading, profileData } = useProfileChainInfo(
     "0x6dd1E0028eF0a634b01E13B2291949255610b38f"
   );
+  const { address, isConnected } = useAccount();
   const [fields, setFields] = useState({
     name: "",
     handle: "",
@@ -60,8 +63,11 @@ export function CreateVault() {
         </h1>
         <hr className="mt-[20px] h-[2px] rounded-sm bg-[#DDDDDD]" />
       </div>
-      <button className="rounded bg-blue-500 px-20 py-2 font-unbounded font-bold text-white">
-        Create Identity Vault
+      <Web3Button />
+      <button className="mb-5 mt-5 rounded bg-blue-500 px-20 py-2 font-unbounded font-bold text-white">
+        {isConnected
+          ? "Create Identity Vault"
+          : "Connect Wallet to Create Vault"}
       </button>
     </div>
   );
