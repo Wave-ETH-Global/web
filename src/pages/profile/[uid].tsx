@@ -1,18 +1,9 @@
-import { Web3Button } from "@web3modal/react";
 import { type NextPage } from "next";
 import Head from "next/head";
-import Link from "next/link";
-import { useState } from "react";
 
-import { BottomNav } from "~/components/bottomnav";
-import { CreateVault } from "~/components/createvault";
-import { SignIn } from "~/components/signin";
 import { ViewProfile } from "~/components/viewprofile";
-import { api } from "~/utils/api";
 
 const OtherProfile: NextPage = () => {
-  const hello = api.example.hello.useQuery({ text: "from tRPC" });
-  const [activeTab, setActiveTab] = useState("profile"); // Declare "profile" as initial active tab.
   return (
     <>
       <Head>

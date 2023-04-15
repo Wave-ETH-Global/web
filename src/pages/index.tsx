@@ -38,7 +38,7 @@ const Home: NextPage = () => {
               isSelf={true}
             />
             <div className="mb-5" />
-            <BottomNav />
+            {/* <BottomNav /> */}
             <div className="mb-20" />
             {/* <p className="">
             {hello.data ? hello.data.greeting : "Loading tRPC query..."}

@@ -19,6 +19,7 @@ import { type AppType } from "next/app";
 import { WagmiConfig, configureChains, createClient } from "wagmi";
 import { arbitrum, mainnet, polygon } from "wagmi/chains";
 
+import { BottomNav } from "~/components/bottomnav";
 import "~/styles/globals.css";
 import { api } from "~/utils/api";
 
@@ -51,6 +52,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
         <Component {...pageProps} />
       </WagmiConfig>
 
+      <BottomNav />
       <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
     </>
   );
