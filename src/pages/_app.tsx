@@ -1,4 +1,13 @@
 // web3
+import { config, dom, library } from "@fortawesome/fontawesome-svg-core";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+import {
+  faBell,
+  faEnvelope,
+  faHome,
+  faSearch,
+  faShieldAlt,
+} from "@fortawesome/free-solid-svg-icons";
 import {
   EthereumClient,
   w3mConnectors,
@@ -22,6 +31,17 @@ const wagmiClient = createClient({
   provider,
 });
 const ethereumClient = new EthereumClient(wagmiClient, chains);
+
+// No auto CSS, preloaded
+config.autoAddCss = false;
+
+// esoteric wizardry to fix fontawesome nextjs hydration error
+if (typeof window !== "undefined") {
+  dom.watch();
+}
+
+// FontAwesome Library
+library.add(faHome, faSearch, faShieldAlt, faBell, faEnvelope);
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (

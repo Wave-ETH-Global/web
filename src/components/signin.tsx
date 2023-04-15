@@ -3,7 +3,9 @@ import React, { useState } from "react";
 export function SignIn() {
   const [inputValue, setInputValue] = useState("");
 
-  const handleChange = (event) => {
+  const handleChange = (event: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
     setInputValue(event.target.value);
   };
 

@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
+
+import useProfileChainInfo from "~/hooks/useProfileChainInfo";
 
 const userFields = [
   { key: "name", placeholder: "Name", required: true },
@@ -12,6 +14,9 @@ const userFields = [
 ];
 
 export function CreateVault() {
+  const { loading, profileData } = useProfileChainInfo(
+    "0x6dd1E0028eF0a634b01E13B2291949255610b38f"
+  );
   const [fields, setFields] = useState({
     name: "",
     handle: "",
@@ -24,11 +29,13 @@ export function CreateVault() {
     avatar: "",
   });
 
-  const handleChange = (event) => {
+  const handleChange = (event: { target: { name: string; value: string } }) => {
     setFields({ ...fields, [event.target.name]: event.target.value });
     console.log(fields);
   };
 
+  console.log(profileData);
+  console.log(loading);
   return (
     <div className="mx-1 flex flex-col items-center justify-center rounded-md bg-[#FFFFFF] p-[20px] shadow-md">
       <div className="w-full p-4">
@@ -48,7 +55,10 @@ export function CreateVault() {
         </div>
         <hr className="mt-[20px] h-[2px] rounded-sm bg-[#DDDDDD]" />
         {/* chain info div */}
-        {/* <hr className="mt-[20px] h-[2px] rounded-sm bg-[#DDDDDD]" /> */}
+        <h1 className="mt-5 text-center font-unbounded text-xl">
+          blockchain data will be here, toggleable (can choose not to include)
+        </h1>
+        <hr className="mt-[20px] h-[2px] rounded-sm bg-[#DDDDDD]" />
       </div>
       <button className="rounded bg-blue-500 px-20 py-2 font-unbounded font-bold text-white">
         Create Identity Vault
