@@ -15,6 +15,60 @@ const userFields = [
   { key: "avatar", placeholder: "Avatar" },
 ];
 
+const mockBlockchainData = [
+  {
+    chainId: "1",
+    token: { name: "!fundrop", symbol: "FUNPASS" },
+    tokenAddress: "0x0000000000664ceffed39244a8312bd895470803",
+    tokenId: "5922",
+    tokenType: "ERC721",
+  },
+  {
+    chainId: "1",
+    token: { name: "Allstarz PSX", symbol: "PSX" },
+    tokenAddress: "0x6120991c423f3566753d3c6c91a5b50d7d2461b4",
+    tokenId: "302",
+    tokenType: "ERC721",
+  },
+  {
+    chainId: "1",
+    token: { name: "FWB", symbol: "FWB" },
+    tokenAddress: "0x6120991c423f3566753d3c6c91a5b50d7d2461b3",
+    tokenType: "ERC20",
+  },
+];
+
+const RenderTokens = ({ tokens, tokenNames }) => {
+  const matchedTokens = tokens.filter((token) =>
+    tokenNames.some(
+      (tokenNameToMatch) =>
+        tokenNameToMatch.name === token.token.name &&
+        tokenNameToMatch.address === token.tokenAddress
+    )
+  );
+
+  return (
+    <div className="ml-5">
+      {matchedTokens.map((token, index) => (
+        <label className="block" key={index}>
+          {token.token.name}
+        </label>
+      ))}
+    </div>
+  );
+};
+
+const tokensToRender = [
+  {
+    name: "!fundrop",
+    address: "0x0000000000664ceffed39244a8312bd895470803",
+  },
+  {
+    name: "FWB",
+    address: "0x6120991c423f3566753d3c6c91a5b50d7d2461b3",
+  },
+];
+
 export function CreateVault() {
   const { loading, profileData } = useProfileChainInfo(
     "0x6dd1E0028eF0a634b01E13B2291949255610b38f"
@@ -58,13 +112,17 @@ export function CreateVault() {
         </div>
         <hr className="mt-[20px] h-[2px] rounded-sm bg-[#DDDDDD]" />
         {/* chain info div */}
-        <h1 className="mt-5 text-center font-unbounded text-xl">
-          blockchain data will be here, toggleable (can choose not to include)
+        <h1 className="my-5 text-center font-unbounded text-xl">
+          Blockchain Data for Wallet
         </h1>
+        <RenderTokens tokens={mockBlockchainData} tokenNames={tokensToRender} />
         <hr className="mt-[20px] h-[2px] rounded-sm bg-[#DDDDDD]" />
       </div>
       <Web3Button />
-      <button className="mb-5 mt-5 rounded bg-blue-500 px-20 py-2 font-unbounded font-bold text-white">
+      <button
+        className="mb-5 mt-5 rounded bg-blue-500 px-20 py-2 font-unbounded font-bold text-white"
+        onClick={() => handleSubmit()}
+      >
         {isConnected
           ? "Create Identity Vault"
           : "Connect Wallet to Create Vault"}
