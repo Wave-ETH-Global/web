@@ -1,21 +1,10 @@
 import React, { useState } from "react";
 
-// const Tile = ({ label, onClick, selected }) => (
-//   <div
-//     onClick={onClick}
-//     className={`cursor-pointer bg-blue-500 ${
-//       selected ? "opacity-75" : ""
-//     } m-1 max-w-[350px] rounded-md px-4 py-2 font-bold text-white`}
-//   >
-//     {label}
-//   </div>
-// );
-
 const Tile = ({ label, onClick, selected, isAvatar }) => (
   <div
     onClick={onClick}
     className={`flex 
-    cursor-pointer items-center justify-center ${
+    max-w-[300px] cursor-pointer items-center justify-center break-words ${
       isAvatar ? "bg-transparent" : "bg-blue-500"
     } ${selected ? "opacity-75" : ""}
       m-1 rounded-md px-4 py-2 font-bold text-white shadow-lg`}
@@ -27,12 +16,13 @@ const Tile = ({ label, onClick, selected, isAvatar }) => (
         className="h-16 w-16 rounded-full border-0 object-cover"
       />
     ) : (
-      label
+      <p className="max-w-[250px] break-words">{label}</p>
     )}
   </div>
 );
 
 export const CreateProfile = ({ vaultData, onSubmitProfile }) => {
+  console.log(vaultData);
   const [selectedEntries, setSelectedEntries] = useState(new Set());
 
   const handleTileClick = (item) => {
@@ -57,7 +47,8 @@ export const CreateProfile = ({ vaultData, onSubmitProfile }) => {
     >
       <div className="w-full p-4">
         <h1 className="my-5 text-center font-unbounded text-xl">Vault</h1>
-        <p className="mb-4 text-center">Click each value to add to profile</p>
+        <p className="mb-4 text-center">Click tiles to add to your profile</p>
+        <h1 className="mb-4 text-center">Personal Information</h1>
         <div className="flex flex-wrap justify-center">
           {/* {Object.entries(vaultData).map(([key, value]) => (
             <Tile
@@ -67,13 +58,26 @@ export const CreateProfile = ({ vaultData, onSubmitProfile }) => {
               onClick={() => handleTileClick(value)}
             />
           ))} */}
-          {Object.entries(vaultData).map(([key, value]) => (
+          {Object.entries(vaultData)
+            .filter(([key]) => key !== "blockchainData")
+            .map(([key, value]) => (
+              <Tile
+                key={key}
+                label={value}
+                onClick={() => handleTileClick(value)}
+                selected={selectedEntries.has(value)}
+                isAvatar={key === "avatar"}
+              />
+            ))}
+        </div>
+        <h1 className="my-4 text-center">Wallet Information</h1>
+        <div className="flex flex-wrap justify-center">
+          {vaultData.blockchainData.map(({ name, type }) => (
             <Tile
-              key={key}
-              label={value}
-              selected={selectedEntries.has(value)}
-              onClick={() => handleTileClick(value)}
-              isAvatar={key === "avatar"}
+              key={name}
+              label={`${name} ${type}`}
+              onClick={() => handleTileClick(name)}
+              selected={selectedEntries.has(name)}
             />
           ))}
         </div>

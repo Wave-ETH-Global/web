@@ -13,7 +13,7 @@ function InfoCard({ header, tokens }: { header: string; tokens: string[] }) {
           }`}
           onClick={() => setIsVisible((prevState) => !prevState)}
         >
-          <i className="fas fa-caret-down"></i>
+          <i className="fas fa-caret-down" />
         </button>
       </div>
 
@@ -43,8 +43,12 @@ export function ProfileFeed() {
       <InfoCard header="DAOs" tokens={["Boys Club", "FWB", "Nouns DAO"]} />
       <InfoCard
         header="Verifiable Credentials"
-        // ! important: disco.xyz integration
+        // ! important: disco.xyz integration in the future for this
         tokens={["Credential1", "Credential2", "Credential3"]}
+      />
+      <InfoCard
+        header="NFTs"
+        tokens={["Crypto Coven", "CryptoPunk", "Azuki"]}
       />
     </div>
   );

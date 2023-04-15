@@ -24,13 +24,14 @@ const vaultData = {
     { name: "CryptoPunk", type: "holder" },
     { name: "CryptoCoven", type: "holder" },
     { name: "Pudgy Penguin", type: "holder" },
-    { name: "Web3 User for over 2 years", type: "" },
+    { name: "450 days old", type: "" },
   ],
 };
 
-const Home: NextPage = () => {
+const Flow: NextPage = () => {
   const hello = api.example.hello.useQuery({ text: "from tRPC" });
   const [activeTab, setActiveTab] = useState("profile"); // Declare "profile" as initial active tab.
+  const [step, setStep] = useState(0);
   return (
     <>
       <Head>
@@ -43,27 +44,33 @@ const Home: NextPage = () => {
         <main className="mx-auto flex w-full max-w-md">
           <div className="">
             <div className="mb-5" />
-            <SignIn />
+            {step === 0 && <SignIn />}
             <div className="mb-5" />
-            <CreateVault />
+            {step === 1 && <CreateVault />}
             <div className="mb-5" />
-            <CreateProfile
-              vaultData={vaultData}
-              onSubmitProfile={console.log}
-            />
+            {step === 2 && (
+              <CreateProfile
+                vaultData={vaultData}
+                onSubmitProfile={console.log}
+              />
+            )}
             <div className="mb-5" />
-            <ViewProfile
-              activeTab={activeTab}
-              setActiveTab={setActiveTab}
-              isSelf={true}
-            />
-
+            {step === 3 && (
+              <ViewProfile
+                activeTab={activeTab}
+                setActiveTab={setActiveTab}
+                isSelf={true}
+              />
+            )}
             <div className="mb-5" />
-            <ViewProfile
-              activeTab={activeTab}
-              setActiveTab={setActiveTab}
-              isSelf={false}
-            />
+            {step === 4 && (
+              <ViewProfile
+                activeTab={activeTab}
+                setActiveTab={setActiveTab}
+                isSelf={false}
+              />
+            )}
+            <button onClick={() => setStep(step + 1)}>next step</button>
             {/* <BottomNav /> */}
             <div className="mb-20" />
             {/* <p className="">
@@ -76,4 +83,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default Flow;

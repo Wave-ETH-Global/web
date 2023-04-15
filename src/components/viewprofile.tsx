@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import QRCode from "react-qr-code";
 
+import { LensIntegration } from "./lensIntegration";
 import { ProfileFeed } from "./profileFeed";
 import { SocialFeed } from "./socialFeed";
 
@@ -67,6 +68,10 @@ const data = {
     github: "https://github.com",
     linkedin: "https://linkedin.com",
   },
+  blockchainData: [
+    { name: "FWB", type: "DAO" },
+    { name: "!fundrop", type: "NFT" },
+  ],
 };
 
 type PlatformData = {
@@ -157,7 +162,6 @@ const MutualConnections: React.FC<MutualConnectionsProps> = ({
 };
 
 export function ViewProfile({ activeTab, setActiveTab, isSelf }: ProfileProps) {
-  const avatarPlaceholder = "avatar-placeholder-color"; // Add desired color here
   const [wave, setWave] = useState(false);
   return (
     <>

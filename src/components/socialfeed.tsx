@@ -10,6 +10,7 @@ interface SocialFeedProps {
   tweets: FeedProps[];
 }
 
+// stani.lens
 export const SocialFeed: React.FC<SocialFeedProps> = ({ header, tweets }) => {
   const [isVisible, setIsVisible] = useState(false);
 

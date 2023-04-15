@@ -1,5 +1,5 @@
 import { Web3Button, useWeb3Modal } from "@web3modal/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAccount, useConnect, useDisconnect } from "wagmi";
 
 import useProfileChainInfo from "~/hooks/useProfileChainInfo";
@@ -42,6 +42,12 @@ const mockBlockchainData = [
     tokenAddress: "0x6120991c423f3566753d3c6c91a5b50d7d2461b3",
     tokenType: "ERC721",
   },
+  {
+    chainId: "1",
+    token: { name: "CryptoPunk", symbol: "CrypPunk" },
+    tokenAddress: "0x6120991c423f3566753d3c6c91a5b50d7d2461b3",
+    tokenType: "ERC721",
+  },
 ];
 
 const RenderTokens = ({ tokens, tokenNames }) => {
@@ -77,13 +83,26 @@ const tokensToRender = [
     name: "Nouns DAO",
     address: "0x6120991c423f3566753d3c6c91a5b50d7d2461b3",
   },
+  {
+    name: "CryptoPunk",
+    address: "0x6120991c423f3566753d3c6c91a5b50d7d2461b3",
+  },
 ];
 
 export function CreateVault() {
-  const { loading, profileData } = useProfileChainInfo(
-    "0x6dd1E0028eF0a634b01E13B2291949255610b38f"
-  );
+  // const { loading, profileData } = useProfileChainInfo(
+  //   "0x6dd1E0028eF0a634b01E13B2291949255610b38f"
+  // );
   const { address, isConnected } = useAccount();
+  const [buttonText, setButtonText] = useState("Connect Wallet");
+
+  useEffect(() => {
+    if (isConnected) {
+      setButtonText("Create Identity Vault");
+    } else {
+      setButtonText("Connect Wallet to Create Vault");
+    }
+  }, [isConnected]);
   const [fields, setFields] = useState({
     name: "",
     handle: "",
@@ -94,6 +113,9 @@ export function CreateVault() {
     currentLocation: "",
     futureLocation: "",
     avatar: "",
+    twitter: "",
+    github: "",
+    linkedin: "",
   });
 
   const handleChange = (event: { target: { name: string; value: string } }) => {
@@ -101,8 +123,8 @@ export function CreateVault() {
     console.log(fields);
   };
 
-  console.log(profileData);
-  console.log(loading);
+  // console.log(profileData);
+  // console.log(loading);
   return (
     <div className="mx-1 flex flex-col items-center justify-center rounded-md bg-[#FFFFFF] p-[20px] shadow-md">
       <div className="w-full p-4">
@@ -133,9 +155,7 @@ export function CreateVault() {
         className="mb-5 mt-5 rounded bg-blue-500 px-20 py-2 font-unbounded font-bold text-white"
         onClick={() => handleSubmit()}
       >
-        {isConnected
-          ? "Create Identity Vault"
-          : "Connect Wallet to Create Vault"}
+        {buttonText}
       </button>
     </div>
   );
