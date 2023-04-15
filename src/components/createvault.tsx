@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useAccount, useConnect, useDisconnect } from "wagmi";
 
 import useProfileChainInfo from "~/hooks/useProfileChainInfo";
+import { useSignup } from "~/hooks/useSignUp";
 
 const userFields = [
   { key: "name", placeholder: "Name", required: true },
