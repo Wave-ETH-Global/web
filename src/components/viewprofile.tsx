@@ -298,6 +298,7 @@ export function ViewProfile({ activeTab, setActiveTab, isSelf }: ProfileProps) {
               },
             ]}
           />
+          <LensIntegration />
         </div>
       )}
     </>
